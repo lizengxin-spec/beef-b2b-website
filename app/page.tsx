@@ -185,7 +185,7 @@ export default function Home() {
               <div className="text-gray-500 text-[13px] leading-relaxed max-w-[260px]">
                 Direct from global ranches to your business. We define the global standard of high-end meat supply and logistics.
               </div>
-            </div>bg-red-500/30
+            </div>
             <div className="mt-10">
               <a href="#" className="group relative inline-flex items-center border-[1.5px] border-black px-10 py-4 overflow-hidden">
                 <span className="absolute inset-0 bg-black translate-y-full transition-transform duration-500 group-hover:translate-y-0"></span>
@@ -219,7 +219,7 @@ export default function Home() {
                         
                         {/* 层级 1: 默认黑白轮廓图 (图二) */}
                         <img 
-                            src="cattle-anatomy.png" 
+                            src="/cattle-anatomy.png" 
                             className={`w-full h-full object-contain grayscale transition-opacity duration-700 ${activePart ? 'opacity-20' : 'opacity-80'}`} 
                             alt="Full Cattle Anatomy" 
                         />
@@ -274,18 +274,18 @@ export default function Home() {
                 <div className="lg:col-span-7 grid grid-cols-2 gap-4 reveal" style={{ transitionDelay: '0.3s' }}>
                     <div className="space-y-4">
                         <div className="aspect-[4/5] bg-gray-200 rounded-2xl overflow-hidden">
-                            <img src="111.jpg" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Factory View 1" />
+                            <img src="/111.jpg" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Factory View 1" />
                         </div>
                         <div className="aspect-square bg-gray-200 rounded-2xl overflow-hidden">
-                            <img src="222.jpg" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Factory View 2" />
+                            <img src="/222.jpg" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Factory View 2" />
                         </div>
                     </div>
                     <div className="pt-12 space-y-4">
                         <div className="aspect-square bg-gray-200 rounded-2xl overflow-hidden">
-                            <img src="555.jpg" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Factory View 3" />
+                            <img src="/555.jpg" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Factory View 3" />
                         </div>
                         <div className="aspect-[4/5] bg-gray-200 rounded-2xl overflow-hidden">
-                            <img src="666.jpg" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Factory View 4" />
+                            <img src="/666.jpg" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Factory View 4" />
                         </div>
                     </div>
                 </div>
