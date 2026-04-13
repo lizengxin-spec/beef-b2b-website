@@ -2,8 +2,13 @@
 
 import React, { useEffect, useState } from 'react';
 
+/**
+ * Beef Asset Configuration
+ */
 const beefImages = ['/beef1.png', '/beef2.png', '/beef3.png'];
 
+// 9个部位的配置：包括ID、名称、对应的特写图路径、以及感应热区的坐标范围
+// 坐标(top, left, width, height)基于容器百分比，你可以根据最终图片的牛形位置微调
 const anatomyParts = [
   { id: 'chuck', name: 'Chuck (7%)', img: '/chuck.png', style: { top: '20%', left: '33%', width: '30%', height: '25%' } },
   { id: 'rib', name: 'Rib (7%)', img: '/rib.png', style: { top: '10%', left: '31%', width: '13%', height: '32%' } },
@@ -19,6 +24,8 @@ const anatomyParts = [
 export default function Home() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
+  
+  // 核心交互状态：当前鼠标悬停的部位ID
   const [activePart, setActivePart] = useState<string | null>(null);
 
   useEffect(() => {
@@ -147,6 +154,7 @@ export default function Home() {
         .footer-link:hover::after { width: 100%; }
       `}} />
 
+      {/* 1. Navigation */}
       <nav className="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-7xl h-20 px-10 flex justify-between items-center z-[1000] nav-glass rounded-full">
         <div className="flex items-center space-x-12">
           <span className="text-2xl font-black tracking-tighter cursor-pointer">BEEF</span>
@@ -163,6 +171,7 @@ export default function Home() {
       </nav>
 
       <main>
+        {/* 2. Hero Section */}
         <section className="relative h-screen flex items-center">
           <div className="bg-text select-none text-black pl-[3vw] z-10 uppercase">Premium Beef</div>
           
@@ -176,7 +185,7 @@ export default function Home() {
               <div className="text-gray-500 text-[13px] leading-relaxed max-w-[260px]">
                 Direct from global ranches to your business. We define the global standard of high-end meat supply and logistics.
               </div>
-            </div>
+            </div>bg-red-500/30
             <div className="mt-10">
               <a href="#" className="group relative inline-flex items-center border-[1.5px] border-black px-10 py-4 overflow-hidden">
                 <span className="absolute inset-0 bg-black translate-y-full transition-transform duration-500 group-hover:translate-y-0"></span>
@@ -187,6 +196,7 @@ export default function Home() {
           </div>
         </section>
 
+        {/* 3. Anatomy Section (整牛部位分布图) - 核心修改区域 */}
         <section id="anatomy" className="py-40 bg-black relative z-50 px-[6vw] overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
@@ -199,18 +209,22 @@ export default function Home() {
                     </p>
                 </div>
                 
+                {/* 交互容器：鼠标离开整体区域时重置状态 */}
                 <div 
                   className="relative w-full aspect-[21/9] flex items-center justify-center reveal"
                   onMouseLeave={() => setActivePart(null)}
                 >
+                    {/* 图片包装容器：继承原有的缩放和过渡效果 */}
                     <div className="relative w-full h-full max-w-6xl group scale-125 transition-transform duration-1000 group-hover:scale-115">
                         
+                        {/* 层级 1: 默认黑白轮廓图 (图二) */}
                         <img 
-                            src="/cattle-anatomy.png" 
+                            src="cattle-anatomy.png" 
                             className={`w-full h-full object-contain grayscale transition-opacity duration-700 ${activePart ? 'opacity-20' : 'opacity-80'}`} 
                             alt="Full Cattle Anatomy" 
                         />
 
+                        {/* 层级 2: 动态生肉特写层 (图一对应部位) */}
                         {anatomyParts.map((part) => (
                           <img
                             key={part.id}
@@ -222,6 +236,7 @@ export default function Home() {
                           />
                         ))}
 
+                        {/* 层级 3: 交互热区 (无形层，拦截鼠标事件) */}
                         {anatomyParts.map((part) => (
                           <div
                             key={`hitbox-${part.id}`}
@@ -235,6 +250,7 @@ export default function Home() {
             </div>
         </section>
 
+        {/* 4. Factory Advantage (工厂优势) */}
         <section id="factory" className="py-40 bg-[#f9f9f9] relative z-50 px-[6vw]">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                 <div className="lg:col-span-5 reveal">
@@ -258,24 +274,25 @@ export default function Home() {
                 <div className="lg:col-span-7 grid grid-cols-2 gap-4 reveal" style={{ transitionDelay: '0.3s' }}>
                     <div className="space-y-4">
                         <div className="aspect-[4/5] bg-gray-200 rounded-2xl overflow-hidden">
-                            <img src="/111.jpg" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Factory View 1" />
+                            <img src="111.jpg" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Factory View 1" />
                         </div>
                         <div className="aspect-square bg-gray-200 rounded-2xl overflow-hidden">
-                            <img src="/222.jpg" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Factory View 2" />
+                            <img src="222.jpg" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Factory View 2" />
                         </div>
                     </div>
                     <div className="pt-12 space-y-4">
                         <div className="aspect-square bg-gray-200 rounded-2xl overflow-hidden">
-                            <img src="/555.jpg" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Factory View 3" />
+                            <img src="555.jpg" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Factory View 3" />
                         </div>
                         <div className="aspect-[4/5] bg-gray-200 rounded-2xl overflow-hidden">
-                            <img src="/666.jpg" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Factory View 4" />
+                            <img src="666.jpg" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Factory View 4" />
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        {/* 5. Brand Story (About) - 保持不动 */}
         <section id="about" className="py-40 px-[6vw] bg-white relative z-50 overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
             <div className="reveal">
@@ -308,6 +325,7 @@ export default function Home() {
           </div>
         </section>
 
+        {/* 6. Selection Gallery (Products) - 保持不动 */}
         <section id="products" className="py-32 bg-[#0a0a0a] text-white overflow-hidden relative z-50">
           <div className="px-[6vw] mb-20">
             <h2 className="text-8xl font-black tracking-tighter opacity-10 mb-[-25px] select-none uppercase">SELECTION</h2>
@@ -333,6 +351,7 @@ export default function Home() {
         </section>
       </main>
 
+      {/* 7. Footer */}
       <footer className="bg-black text-white pt-32 pb-12 px-[6vw] relative z-50">
         <div className="max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-32 border-b border-white/10 pb-24">
